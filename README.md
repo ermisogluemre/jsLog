@@ -1,0 +1,2 @@
+# jsLog
+ Javascript Logging Library
