@@ -1,0 +1,80 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="../dist/jsLog.js"></script>
+		<style>
+		*{
+		 margin:0;
+		 padding: 0;
+		}
+		</style>
+		<script>
+		function createLogEvent(){
+			jsLog.Log(document.getElementById("new_msg").value);
+		}
+		
+		function createWarningEvent(){
+			jsLog.Warning(document.getElementById("new_msg").value);
+		}
+		
+		function createErrorEvent(){
+			jsLog.Error(document.getElementById("new_msg").value);
+		}
+		</script>
+	</head>
+	<body>
+		
+		<div style="width:900px;margin-left:auto;margin-right:auto;">
+			<fieldset>
+				<legend>TEST</legend>
+				<fieldset>
+					<legend>Latest Notification</legend>
+					<br/>
+					<label for="last_date">Latest Notification TimeStamp</label>
+					<input type="text" id="last_date" name="last_date" style="width:100%;" disabled></input>
+					<br/>
+					<label for="last_msg">Latest Notification Message</label>
+					<input type="text" id="last_msg" name="last_msg" style="width:100%;" disabled></input>
+					<br/>
+					<label for="last_type">Latest Notification Type</label>
+					<input type="text" id="last_type" name="last_type" style="width:100%;" disabled></input>
+					<br/>
+				</fieldset>
+				<fieldset>
+					<legend>Create Notification</legend>
+					<br/>
+					<label for="new_msg">New Message</label>
+					<input type="text" id="new_msg" name="new_msg" style="width:100%;"></input><br/><br/>
+					<button type="button" onClick="createLogEvent();">Create Log Event</button> 
+					<button type="button" onClick="createWarningEvent();">Create Warning Event</button> 
+					<button type="button" onClick="createErrorEvent();">Create Error Event</button> 
+					<br/><br/>
+				</fieldset>
+			</fieldset>
+		</div>
+		
+		
+		<script>
+		var a = new Object();
+		a["description"] = "Test function";
+		a.msg = function(msg){
+			console.log(msg);
+		};
+		
+		jsLog.onNewMessage(function(m){
+			document.getElementById("last_date").value = m["date"];
+			document.getElementById("last_msg").value = m["msg"];
+			document.getElementById("last_type").value = m["type"];
+		});
+
+		jsLog.Log(a);
+		jsLog.Error("This is an error");
+		jsLog.Warning("This is a warning");
+		jsLog.Error("true");
+		var obj = JSON.parse('{ "name":"John", "age":30, "city":"New York"}');
+		jsLog.Log(obj);
+		
+		
+		</script>
+	</body>
+</html>
