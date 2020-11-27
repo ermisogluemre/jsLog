@@ -177,8 +177,8 @@ function thisLine() {
   var err = new EvalError('Dummy', 'Dummy.js', 1);
   var caller_line = err.stack.split("\n");
   var target = caller_line[caller_line.length-2];
-  var index = target.indexOf("at ");
-  var clean = target.slice(index+2, target.length);
+  var index = target.indexOf("@");
+  var clean = target.slice(index+1, target.length);
   return clean;
 }
 
